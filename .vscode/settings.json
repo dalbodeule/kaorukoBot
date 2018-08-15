@@ -1,0 +1,12 @@
+{
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "editor.tabSize": 2
+    },
+    "[json]": {
+        "editor.tabSize": 2
+    },
+    "git.ignoreLimitWarning": true
+}
