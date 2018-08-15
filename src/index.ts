@@ -1,7 +1,8 @@
 import * as Discord from 'discord.js'
+import * as log4js from 'log4js'
+
 const client = new Discord.Client()
 const config = require('../config.json')
-import * as log4js from 'log4js'
 
 const logger = log4js.getLogger()
 
