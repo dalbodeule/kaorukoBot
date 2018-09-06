@@ -2,8 +2,8 @@ import { Client } from 'discord.js'
 import loggerBase from './logger'
 
 try {
-  const config = require('../config.json')  
-
+  const config = require('../config.json')
+  
   const client = new Client()
   const PREFIX = config.prefix
 
@@ -15,7 +15,7 @@ try {
     logger.info(`Logged in as ${client.user.tag}!`)
     logger.debug('Debug Mode!')
     client.user.setStatus('online')
-    client.user.setActivity("Made by small_sunshine", {
+    client.user.setActivity(`this server is #${client.shard.id}`, {
       type: 'PLAYING'
     })
   });
