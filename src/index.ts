@@ -1,14 +1,13 @@
-import { Client, Message} from 'eris'
+import { ShardingManager } from 'discord.js'
 import * as log4js from 'log4js'
+import * as path from 'path'
 
 try {
   const config = require('../config.json')  
   const logger = log4js.getLogger()
 
-  const client = new Client(config.token, {
-    firstShardID: 0,
-    maxShards: 'auto',
-  })
+  const manager = new ShardingManager(path.join(__dirname, 'bot.js'), 
+    { token: config.token })
 
   if (process.env.NODE_ENV === 'production') {
     logger.level = 'INFO'
@@ -19,30 +18,32 @@ try {
     process.env.NODE_ENV = 'development'
   }
   logger.info(`${process.env.NODE_ENV} mode`)
+  
+  manager.spawn()
+  manager.on('launch', shard => logger.info(`Launched shard ${shard.id}`))
 
-  client.on('ready', () => {
-    logger.info(`Logged in as ${client.user}!`)
-    logger.debug('Debug Mode!')
-    client.editStatus('online', {
-      name: 'thx for using KaorukoBot',
-      type: 0
-    })
-    logger.info(client.guildShardMap)
-  });
-
-  client.on('shardReady', (id: number) => {
-    logger.info(`shard ready! id: ${id}`)
-  })
-
-  client.on('messageCreate', msg => {
-    if (msg.content === 'ping') {
-      let author = msg.member || msg.author
-      logger.info(`@${author.id} ping!`)
-      client.createMessage(msg.channel.id, `<@${author.id}> Pong!`)
+  manager.on('message', (shard, msg) => {
+    switch (msg.type) {
+      case 'info':
+        logger.info(`Shard[${shard.id}] : ${msg.message}`)
+        break
+      case 'debug':
+        logger.debug(`Shard[${shard.id}] : ${msg.message}`)
+        break
+      case 'error':
+        logger.error(`Shard[${shard.id}] : ${msg.message}`)
+        break
+      case 'fatal':
+        logger.fatal(`Shard[${shard.id}] : ${msg.message}`)
+        break
+      case 'warn':
+        logger.warn(`Shard[${shard.id}] : ${msg.message}`)
+        break
+      case 'trace':
+        logger.trace(`shard[${shard.id}] : ${msg.message}`)
+        break
     }
-  });
-
-  client.connect()
+  })
 } catch (e) {
   console.log(e)
 }
