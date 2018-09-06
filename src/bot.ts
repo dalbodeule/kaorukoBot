@@ -7,7 +7,7 @@ try {
   const client = new Client()
   const PREFIX = config.prefix
 
-  const logger = loggerBase(process)
+  const logger = loggerBase(client.shard.send)
 
   logger.info(`${process.env.NODE_ENV} mode`)
 

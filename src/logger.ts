@@ -1,42 +1,44 @@
-export default (process: any): any => {
+import { ShardClientUtil as Shard } from 'discord.js'
+
+export default (send: Shard['send']): any => {
   return {
     info (message: string): void {
-      process.send({
+      send({
         type: 'info',
         message
       })
     },
 
     debug (message: string): void {
-      process.send({
+      send({
         type: 'debug',
         message
       })
     },
 
     error (message: string): void {
-      process.send({
+      send({
         type: 'error',
         message
       })
     },
 
     fatal (message: string): void {
-      process.send({
+      send({
         type: 'fatal',
         message
       })
     },
 
     warn (message: string): void {
-      process.send({
+      send({
         type: 'warn',
         message
       })
     },
 
     trace (message: string): void {
-      process.send({
+      send({
         type: 'trace',
         message
       })

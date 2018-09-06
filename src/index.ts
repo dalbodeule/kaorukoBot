@@ -6,8 +6,9 @@ try {
   const config = require('../config.json')  
   const logger = log4js.getLogger()
 
-  const manager = new ShardingManager(path.join(__dirname, 'bot.js'), 
-    { token: config.token })
+  const manager = new ShardingManager(path.join(__dirname, 'bot.js'), {
+    token: config.token
+  })
 
   if (process.env.NODE_ENV === 'production') {
     logger.level = 'INFO'
