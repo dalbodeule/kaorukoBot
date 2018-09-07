@@ -1,9 +1,11 @@
 import { Client } from 'discord.js'
 import loggerBase from './logger'
+import { default as modules, moduleType } from './modules'
 const pidusage = require('pidusage')
 
 try {
   const config = require('../config.json')
+  const loadedModules: moduleType = {}
 
   const client = new Client({
     fetchAllMembers: true
@@ -27,22 +29,6 @@ try {
     logger.info(`shard ready! id: ${id}`)
   })
 
-  client.on('message', msg => {
-    if (msg.content === 'ping' || msg.content === PREFIX + 'ping') {
-      let author = msg.member || msg.author
-      logger.info(`@${author.id} ping!`)
-      msg.reply('Pong!')
-    } else if (msg.content === PREFIX + 'shard') {
-      let author = msg.member || msg.author
-      logger.info(`@${author.id} shard!`)
-      client.shard.broadcastEval('this.guilds.size')
-      .then(results => {
-        msg.reply(`${results.reduce((prev, val) => prev + val, 0)} total guilds`)
-      })
-      .catch(console.error);
-    }
-  });
-
   client.on('guildCreate', msg => {
     logger.info(`join '${msg.name}' guild, id: ${msg.id}`)
   })
@@ -50,6 +36,10 @@ try {
   client.on('guildDelete', msg => {
     logger.info(`exit '${msg.name}' guild, id: ${msg.id}`)
   })
+
+  for (let variable in modules) {
+    loadedModules[variable] = modules[variable](client, PREFIX, logger)
+  }
 
   async function processStatus () {
     try {

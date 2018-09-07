@@ -45,3 +45,12 @@ export default (send: Shard['send']): any => {
     }
   }
 }
+
+export interface loggerType {
+  info (message: string): void
+  debug (message: string): void
+  error (message: string): void
+  fatal (message: string): void
+  warn (message: string): void
+  trace (message: string): void
+}
