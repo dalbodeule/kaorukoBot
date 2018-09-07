@@ -20,6 +20,8 @@ discord
  - [ ] lang - 언어 변경
  - [ ] help - 도움말 명령어
  - [ ] whatanime - whatanime.ga 검색
+ - [x] ping - 봇 작동확인
+ - [x] server - 몇번 서버로 돌아가는지 확인 (shard)
 
 ### 어드민커맨드
  - [ ] welcome - 커스텀 입장메세지
