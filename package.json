@@ -1,6 +1,6 @@
 {
   "name": "kaorukobot",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "카오루코봇이다!",
   "main": "./dist/index.js",
   "scripts": {
