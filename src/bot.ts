@@ -1,5 +1,6 @@
 import { Client } from 'discord.js'
 import loggerBase from './logger'
+const pidusage = require('pidusage')
 
 try {
   const config = require('../config.json')
@@ -36,12 +37,30 @@ try {
       logger.info(`@${author.id} shard!`)
       client.shard.broadcastEval('this.guilds.size')
       .then(results => {
-        console.log(`${results.reduce((prev, val) => prev + val, 0)} total guilds`);
+        msg.reply(`${results.reduce((prev, val) => prev + val, 0)} total guilds`)
       })
       .catch(console.error);
-      msg.reply('see the console')
     }
   });
+
+  async function processStatus () {
+    try {
+      let usage = await pidusage(process.pid)
+      client.shard.send({
+        type: 'status',
+        data: {
+          memory: ( usage.memory / 1024 / 1024 ),
+          cpu: usage.cpu,
+          uptime: process.uptime()
+        }
+      })
+    } catch (err) {
+      logger.error(err.message)
+      logger.trace(err.stack)
+    }
+  }
+  setTimeout(processStatus, 1 * 1000)
+  setInterval(processStatus, 10 * 1000)
 
   client.login(config.token)
 } catch (e) {

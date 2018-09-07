@@ -15,6 +15,7 @@
   "author": "small_sunshine",
   "license": "AGPL-3.0",
   "dependencies": {
+    "@types/pidusage": "^2.0.0",
     "bufferutil": "^4.0.0",
     "dateformat": "^3.0.3",
     "discord.js": "^11.4.2",
@@ -24,6 +25,7 @@
     "google-parser": "^1.2.2",
     "log4js": "^3.0.4",
     "mysql2": "^1.6.1",
+    "pidusage": "^2.0.16",
     "sequelize": "^4.38.0",
     "uws": "^99.0.0",
     "whatanimega-helper": "^1.0.8"
@@ -35,6 +37,7 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
+    "tslint": "^5.11.0",
     "typescript": "^3.0.1"
   }
 }
