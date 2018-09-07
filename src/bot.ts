@@ -43,6 +43,14 @@ try {
     }
   });
 
+  client.on('guildCreate', msg => {
+    logger.info(`join '${msg.name}' guild, id: ${msg.id}`)
+  })
+
+  client.on('guildDelete', msg => {
+    logger.info(`exit '${msg.name}' guild, id: ${msg.id}`)
+  })
+
   async function processStatus () {
     try {
       let usage = await pidusage(process.pid)
@@ -59,8 +67,8 @@ try {
       logger.trace(err.stack)
     }
   }
-  setTimeout(processStatus, 1 * 1000)
-  setInterval(processStatus, 10 * 1000)
+  setTimeout(processStatus, 10 * 1000)
+  setInterval(processStatus, 60 * 1000)
 
   client.login(config.token)
 } catch (e) {
