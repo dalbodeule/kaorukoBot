@@ -21,7 +21,7 @@ try {
   }
   logger.info(`${process.env.NODE_ENV} mode`)
   
-  manager.spawn()
+  manager.spawn(2)
   manager.on('launch', shard => logger.info(`Launched shard ${shard.id}`))
 
   manager.on('message', (shard, msg) => {
