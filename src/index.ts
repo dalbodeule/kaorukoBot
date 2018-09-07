@@ -7,7 +7,8 @@ try {
   const logger = log4js.getLogger()
 
   const manager = new ShardingManager(path.join(__dirname, 'bot.js'), {
-    token: config.token
+    token: config.token,
+    totalShards: 'auto'
   })
 
   if (process.env.NODE_ENV === 'production') {

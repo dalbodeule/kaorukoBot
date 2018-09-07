@@ -3,8 +3,10 @@ import loggerBase from './logger'
 
 try {
   const config = require('../config.json')
-  
-  const client = new Client()
+
+  const client = new Client({
+    fetchAllMembers: true
+  })
   const PREFIX = config.prefix
 
   const logger = loggerBase(client.shard.send)
@@ -29,6 +31,15 @@ try {
       let author = msg.member || msg.author
       logger.info(`@${author.id} ping!`)
       msg.reply('Pong!')
+    } else if (msg.content === PREFIX + 'shard') {
+      let author = msg.member || msg.author
+      logger.info(`@${author.id} shard!`)
+      client.shard.broadcastEval('this.guilds.size')
+      .then(results => {
+        console.log(`${results.reduce((prev, val) => prev + val, 0)} total guilds`);
+      })
+      .catch(console.error);
+      msg.reply('see the console')
     }
   });
 
