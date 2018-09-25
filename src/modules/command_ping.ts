@@ -1,15 +1,31 @@
-import { Client } from 'discord.js'
+import * as Discord from 'discord.js'
 import { loggerType } from '../logger';
-import { ModuleFunction } from '.';
+import { message as Message } from '../moduleBase'
 
-const main: ModuleFunction = (client: Client, PREFIX: string, logger: loggerType) => {
-  client.on('message', async (msg) => {
-    if (msg.content === 'ping' || msg.content === PREFIX + 'ping') {
+export default class CommandPing extends Message {
+  constructor (client: Discord.Client, PREFIX: string, logger: loggerType) {
+    super(client, PREFIX, logger)
+  }
+  
+  protected async module(msg: Discord.Message) {
+    if (msg.content === 'ping' || msg.content === this.PREFIX + 'ping'
+      && !msg.author.bot) {
       let author = msg.member || msg.author
-      logger.info(`@${author.id} ping!`)
-      msg.reply('Pong!')
-    }
-  })
-}
+      let serverid = (msg.guild ? msg.guild.id : 'private')
 
-export default main
+      try {
+        this.logger.info(`command: ping, userid: ${author.id}, ` +
+          `guild: ${serverid}, type: pending`)
+
+        msg.reply('Pong!')
+
+        this.logger.info(`command: ping, userid: ${author.id}, ` +
+          `guild: ${serverid}, type: success`)
+      } catch (e) {
+        this.logger.info(`command: ping, userid: ${author.id}, ` +
+          `guild: ${serverid}, type: error`)
+        this.logger.debug(e)
+      }
+    }
+  }
+}

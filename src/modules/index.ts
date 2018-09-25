@@ -1,18 +1,13 @@
-import command_ping from './command_ping'
-import command_server from './command_server'
+import commandPing from './command_ping'
+import commandServer from './command_server'
+import messageLogger from './message_logger'
 
-import { loggerType } from '../logger';
-import { Client } from 'discord.js'
-
-const modules: moduleType =  {
-  command_ping,
-  command_server
+const modules: {
+  [index: string]: any
+} = {
+  commandPing,
+  commandServer,
+  messageLogger
 }
 
 export default modules
-
-export interface moduleType {
-  [key: string]: ModuleFunction
-}
-
-export type ModuleFunction = (client: Client, PREFIX: string, logger: loggerType) => any
