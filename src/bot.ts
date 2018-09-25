@@ -55,9 +55,9 @@ try {
       client.shard.send({
         type: 'status',
         data: {
-          memory: ( usage.memory / 1024 / 1024 ),
-          cpu: usage.cpu,
-          uptime: process.uptime()
+          memory: ( usage.memory / 1024 / 1024 ).toFixed(4),
+          cpu: usage.cpu.toFixed(4),
+          uptime: process.uptime().toFixed(2)
         }
       })
     } catch (err) {
