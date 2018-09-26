@@ -45,7 +45,7 @@ try {
         logger.trace(`Shard[${shard.id}] : ${msg.message}`)
         break
       case 'status':
-        logger.info(`Shard[${shard.id}] : mem: ${msg.data.memory}MiB, cpu: ${msg.data.cpu}%, uptime: ${msg.data.uptime}sec`)
+        logger.debug(`Shard[${shard.id}] : mem: ${msg.data.memory}MiB, cpu: ${msg.data.cpu}%, uptime: ${msg.data.uptime}sec`)
         break
       default:
         logger.info(`Shard[${shard.id}]: ${msg}`)

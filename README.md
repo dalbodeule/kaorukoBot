@@ -12,11 +12,10 @@ discord
 
 ### 커맨드
 
- - [ ] uptime - 작동시간 확인
+ - [x] uptime - 작동시간 확인
  - [ ] pic - 구글 이미지검색
  - [ ] gg - 구글 검색
  - [ ] me - 자신의 정보 확인
- - [ ] me userid - 선택한 유저의 정보 확인
  - [ ] lang - 언어 변경
  - [ ] help - 도움말 명령어
  - [ ] whatanime - whatanime.ga 검색
