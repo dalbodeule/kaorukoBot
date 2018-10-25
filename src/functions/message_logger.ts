@@ -1,6 +1,6 @@
 import * as Discord from 'discord.js'
 import { loggerType } from '../logger';
-import { message as Message } from '../moduleBase'
+import { message as Message } from '../functionBase'
 
 export default class MessageLogger extends Message {
   constructor (client: Discord.Client, PREFIX: string, logger: loggerType) {

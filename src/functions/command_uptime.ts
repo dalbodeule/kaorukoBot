@@ -1,6 +1,6 @@
 import * as Discord from 'discord.js'
 import { loggerType } from '../logger';
-import { message as Message } from '../moduleBase'
+import { message as Message } from '../functionBase'
 import { timeFormat } from '../helper'
 
 export default class CommandUptime extends Message {
