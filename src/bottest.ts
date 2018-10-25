@@ -55,7 +55,7 @@ try {
     loadFunctions[key] = new functions[key](client, PREFIX, logger)
     loadFunctions[key].run()
 
-    logger.debug('module ' + key + 'successfuly load')
+    logger.debug('function ' + key + 'successfuly load')
   }
 
   /* async function processStatus () {

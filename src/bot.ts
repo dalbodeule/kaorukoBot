@@ -1,12 +1,11 @@
 import { Client } from 'discord.js'
 import loggerBase from './logger'
-import modules from './modules'
-import * as moduleBase from './moduleBase'
+import functions from './functions'
+import * as functionBase from './functionBase'
+import { config, Config } from './config'
 const pidusage = require('pidusage')
 
 try {
-  const config = require('../config.json')
-
   const client = new Client({
     fetchAllMembers: true
   })
@@ -37,16 +36,16 @@ try {
     logger.info(`exit '${msg.name}' guild, id: ${msg.id}`)
   })
 
-  const loadModules: {
+  const loadFunctions: {
     [index: string]:
-      moduleBase.message
+      functionBase.message
   } = {}
 
-  for (let key in modules) {
-    loadModules[key] = new modules[key](client, PREFIX, logger)
-    loadModules[key].run()
+  for (let key in functions) {
+    loadFunctions[key] = new functions[key](client, PREFIX, logger)
+    loadFunctions[key].run()
 
-    logger.debug('module ' + key + 'successfuly load')
+    logger.debug('function ' + key + 'successfuly load')
   }
 
   async function processStatus () {
@@ -68,7 +67,7 @@ try {
   setTimeout(processStatus, 10 * 1000)
   setInterval(processStatus, 60 * 1000)
 
-  client.login(config.token)
+  client.login(config.apiKey.discord)
 } catch (e) {
   console.log(e)
 }
