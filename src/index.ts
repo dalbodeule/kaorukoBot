@@ -29,7 +29,7 @@ try {
     logger.info(`Logged in as ${client.user.tag}!`)
     logger.debug('Debug Mode!')
     client.user.setStatus('online')
-    client.user.setActivity(`this server is #0`, {
+    client.user.setActivity(`Hello!`, {
       type: 'PLAYING'
     })
   });
@@ -58,24 +58,19 @@ try {
     logger.debug('function ' + key + 'successfuly load')
   }
 
-  /* async function processStatus () {
+  async function processStatus () {
     try {
       let usage = await pidusage(process.pid)
-      client.shard.send({
-        type: 'status',
-        data: {
-          memory: ( usage.memory / 1024 / 1024 ).toFixed(4),
-          cpu: usage.cpu.toFixed(4),
-          uptime: process.uptime().toFixed(2)
-        }
-      })
+      logger.info(`memory: ${( usage.memory / 1024 / 1024 ).toFixed(4)}MiB, ` +
+        `cpu: ${usage.cpu.toFixed(4)}%, ` +
+        `uptime: ${process.uptime().toFixed(2)}sec`)
     } catch (err) {
       logger.error(err.message)
       logger.trace(err.stack)
     }
   }
   setTimeout(processStatus, 10 * 1000)
-  setInterval(processStatus, 60 * 1000) */
+  setInterval(processStatus, 60 * 1000)
 
   client.login(config.apiKey.discord)
 } catch (e) {
