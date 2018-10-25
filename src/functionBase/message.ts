@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js'
-import { loggerType } from '../logger';
+import { Logger as loggerType } from 'log4js';
 
 export default class Message {
   protected client: Discord.Client

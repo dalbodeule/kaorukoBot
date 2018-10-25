@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js'
-import { loggerType } from '../logger';
+import { Logger as loggerType } from 'log4js';
 import { message as Message } from '../functionBase'
 import { timeFormat } from '../helper'
 
