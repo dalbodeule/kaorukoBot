@@ -3,7 +3,7 @@ import { Logger as loggerType } from 'log4js';
 import * as model from '../db'
 import * as types from '../types'
 
-export default class Message {
+export default class GuildCreate {
   protected client: Discord.Client
   protected PREFIX: string
   protected logger: loggerType
@@ -17,10 +17,10 @@ export default class Message {
   }
 
   public run (): void {
-    this.client.on('message', (msg) => this.module(msg) )
+    this.client.on('guildCreate', (msg) => this.module(msg) )
   }
 
-  protected async module (msg: Discord.Message): Promise<void> {
+  protected async module (msg: Discord.Guild): Promise<void> {
 
   }
 }

@@ -1,5 +1,7 @@
-// import * as module from './module'
+import * as language from './language'
+import * as model from './model'
 
 export {
-  // module
+  language,
+  model
 }

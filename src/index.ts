@@ -4,10 +4,9 @@ import functions from './functions'
 import * as functionBase from './functionBase'
 import { config, Config } from './config'
 
-const pidusage = require('pidusage')
+// const pidusage = require('pidusage')
 
 try {
-
   const client = new Client({
     fetchAllMembers: true
   })
@@ -34,18 +33,6 @@ try {
     })
   });
 
-  client.on('shardReady', (id: number) => {
-    logger.info(`shard ready! id: ${id}`)
-  })
-
-  client.on('guildCreate', msg => {
-    logger.info(`join '${msg.name}' guild, id: ${msg.id}`)
-  })
-
-  client.on('guildDelete', msg => {
-    logger.info(`exit '${msg.name}' guild, id: ${msg.id}`)
-  })
-
   const loadFunctions: {
     [index: string]:
       functionBase.message
@@ -58,7 +45,7 @@ try {
     logger.debug('function ' + key + 'successfuly load')
   }
 
-  async function processStatus () {
+  /* async function processStatus () {
     try {
       let usage = await pidusage(process.pid)
       logger.info(`memory: ${( usage.memory / 1024 / 1024 ).toFixed(4)}MiB, ` +
@@ -70,7 +57,7 @@ try {
     }
   }
   setTimeout(processStatus, 10 * 1000)
-  setInterval(processStatus, 60 * 1000)
+  setInterval(processStatus, 60 * 1000) */
 
   client.login(config.apiKey.discord)
 } catch (e) {

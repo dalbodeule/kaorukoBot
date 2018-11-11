@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize'
 
-export let name = 'guilds'
+export let name = 'guild'
 
 export let config = {
   timestamps: true

@@ -1,6 +1,6 @@
 import mysql from '../_mysql'
 
-import * as guilds from './guilds'
+import * as guilds from './guild'
 import * as leaveMessage from './leaveMessage'
 import * as welcomeMesasge from './welcomeMessage'
 import * as language from './language'
@@ -18,15 +18,17 @@ const setFK = (origin: any, foreignKey:string, target: any, onUpdate:string, onD
 }
 
 const tables = {
-  Guilds: defineTable(guilds),
+  Guild: defineTable(guilds),
   Language: defineTable(language),
   LeaveMessage: defineTable(leaveMessage),
   WelcomeMessage: defineTable(welcomeMesasge)
 }
 
-setFK(tables.Guilds, 'guild', tables.Language, 'cascade', 'cascade')
-setFK(tables.Guilds, 'guild', tables.LeaveMessage, 'cascade', 'cascade')
-setFK(tables.WelcomeMessage, 'guild', tables.WelcomeMessage,
+setFK(tables.Guild, 'guildId', tables.Language,
+  'cascade', 'cascade')
+setFK(tables.Guild, 'guildId', tables.LeaveMessage,
+  'cascade', 'cascade')
+setFK(tables.Guild, 'guildId', tables.WelcomeMessage,
   'cascade', 'cascade')
 
 mysql.sync()

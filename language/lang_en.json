@@ -1,0 +1,17 @@
+{
+  "lang" :{
+    "langname" :"English",
+    "display" :"🇺🇸 English",
+    "code" :"en"
+  },
+  "command": {
+    "guild": {
+      "title": "This is the information of this guild!",
+      "name": "Guild Name",
+      "birthday": "Guild creation date",
+      "membercount": "Total Members",
+      "serverloc": "Server Location",
+      "lang": "Spoken language"
+    }
+  }
+}
